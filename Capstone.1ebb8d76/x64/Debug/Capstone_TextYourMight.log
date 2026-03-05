@@ -1,0 +1,4 @@
+﻿  cap_main.cpp
+C:\Users\kjarb\Desktop\coding\Capstone_TextYourMight\cap_main.cpp(103,10): warning C4553: '==': result of expression not used; did you intend '='?
+C:\Users\kjarb\Desktop\coding\Capstone_TextYourMight\cap_main.cpp(106,10): warning C4553: '==': result of expression not used; did you intend '='?
+  Capstone_TextYourMight.vcxproj -> C:\Users\kjarb\Desktop\coding\Capstone_TextYourMight\x64\Debug\Capstone_TextYourMight.exe
