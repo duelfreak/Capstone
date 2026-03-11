@@ -11,6 +11,7 @@ int blocking(int choice);
 int oppAction();
 int oppBlock(int oppSelect);
 int oppCalc(int oppSelect);
+int quickBlock(int oppSelect);
 
 
 
@@ -32,27 +33,48 @@ int main() {
 	case 1:
 		do {
 			cout << "Action: \n1.Punch\n2.Kick\n3.Combo\n4.Block\n5.Wait\n";
-			choice = getUserNum();
+ 			choice = getUserNum();
 			bool checkAction(choice);
-			if ((choice) != 4) {
-				hit = calculation(choice);
-				cout << "you did " << hit << " damage" << endl;
-			}
-			else {
-				blocking(choice);
-			}
+
+				if ((choice) == 4 || choice ==5){
+					blocking(choice);
+				}
+				else if (choice != 5) {
+					quickBlock(oppSelect);
+					bool blockingCheck = true;
+					cout << "opp blocked it\n";
+					
+					//here needs to be the opp blocking to simulate immediate response
+					hit = calculation(choice);
+
+					cout << "you did " << hit << " damage" << endl;
+		;
+				}
+				else {
+					cout << "Invalid input\n";
+				}
+
 
 			oppSelect = oppAction();
 			bool checkOppAction(oppSelect);
-			if ((oppHit) != 4) {
+			if (oppSelect != 5) {
 				oppHit = oppCalc(oppSelect);
-				cout << "Opp did " << oppHit << " damage" << endl;
+				if (choice == 4) {
+					cout << "attack blocked\n";
+				}
+				else {
+					cout << "Opp did " << oppHit << " damage" << endl;
+				}
+			}
+			else if (oppSelect == 4) {
+				bool oppBlock = true;
+				cout << "opp blocked the attack\n";
 			}
 			else {
-				oppBlock(oppSelect);
+				cout << "opp is standing by\n";
 			}
 
-		} while (choice);
+		}while (choice);
 	case 2:
 		displayMenu();
 		break;
@@ -78,6 +100,13 @@ int getUserNum() {
 	return input;
 }
 
+int oppAction()
+{
+	int n = 1 + rand() % 5;
+
+	return n;
+}
+
 int calculation(int choice)
 {
 	int dmg{};
@@ -97,27 +126,20 @@ int calculation(int choice)
 }
 
 int blocking(int choice) {
-	if (choice == 4) {
-		cout << "Standing by\n";
-		int idle{};
-		return idle;
-	}
-	else {
+
+	if(choice == 4) {
 		cout << "Guard up\n";
 		int guard{};
 		return guard;
 	}
+	else {
+		cout << "Standing by\n";
+		int idle{};
+		return idle;
+	}
 
 }
 
-
-
-int oppAction()
-{
-	int n = 1 + rand() % 5;
-
-	return n;
-}
 
 int oppCalc(int oppSelect)
 {
@@ -135,8 +157,22 @@ int oppCalc(int oppSelect)
 		cout << "invalid\n";
 	}
 	return dmg;
-
 }
+
+int quickBlock(int oppSelect)
+{
+	int block;
+	int fail = 0;
+	block = oppAction();
+	if (block == 5) {
+		return block;
+	}
+	else {
+		return fail;
+	}
+}
+
+
 
 int oppBlock(int oppSelect)
 {
